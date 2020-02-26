@@ -1,0 +1,5 @@
+CREATE DATABASE bonsai
+   WITH OWNER bonsai
+   TEMPLATE template1
+   ENCODING 'UTF8'
+   CONNECTION LIMIT  -1;
