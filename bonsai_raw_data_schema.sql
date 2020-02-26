@@ -7,6 +7,8 @@
 -- workflow to allow for community review. Large changes will probably require
 -- a BEP: https://github.com/BONSAMURAIS/enhancements
 
+BEGIN;
+
 CREATE TABLE "location" (
   "id" SERIAL PRIMARY KEY,
   -- Ontology uses schema:Place (https://schema.org/Place), which wants the
@@ -33,16 +35,27 @@ CREATE TABLE "agent" (
   "location_id" int NOT NULL REFERENCES "location" ("id")
 );
 
+CREATE TABLE "unit" (
+  "id" SERIAL PRIMARY KEY,
+  "label" text,
+  "uri" text
+);
+
+CREATE TABLE "activity_type" (
+  "id" SERIAL PRIMARY KEY,
+  "label" text
+);
+
 CREATE TABLE "activity" (
   "id" SERIAL PRIMARY KEY,
   "performed_by_id" int REFERENCES "agent" ("id"),
   "temporal_extent_id" int NOT NULL REFERENCES "temporal_extent" ("id"),
   "location_id" int NOT NULL REFERENCES "location" ("id"),
-  "determining_flow_id" int REFERENCES "flow" ("id"),
+  "determining_flow_id" int,
   "activity_type_id" int NOT NULL REFERENCES "activity_type" ("id")
 );
 
-CREATE TABLE "activity_type" (
+CREATE TABLE "flow_object" (
   "id" SERIAL PRIMARY KEY,
   "label" text
 );
@@ -58,23 +71,17 @@ CREATE TABLE "flow" (
   "object_type_id" int REFERENCES "flow_object" ("id")
 );
 
-ALTER TABLE "flow"
-  ADD CONSTRAINT flow_has_activity
-  ("input_of_id" IS NOT NULL or "output_of_id" IS NOT NULL);
+ALTER TABLE "flow" ADD CONSTRAINT flow_has_activity CHECK ("input_of_id" IS NOT NULL OR "output_of_id" IS NOT NULL);
 
-CREATE TABLE "flow_object" (
-  "id" SERIAL PRIMARY KEY,
-  "label" text
-);
-
-CREATE TABLE "unit" (
-  "id" SERIAL PRIMARY KEY,
-  "label" text,
-  "uri" text
-);
+ALTER TABLE activity
+      ADD CONSTRAINT activity_fk_flow
+      FOREIGN KEY ("determining_flow_id")
+      REFERENCES flow (id);
 
 CREATE TABLE "balancable_property" (
   "id" SERIAL PRIMARY KEY,
   "label" text,
   "flow_id" int REFERENCES "flow" ("id")
 );
+
+COMMIT;
