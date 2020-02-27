@@ -32,7 +32,7 @@ CREATE TABLE "temporal_extent" (
 CREATE TABLE "agent" (
   "id" SERIAL PRIMARY KEY,
   "label" text,
-  "location_id" int NOT NULL REFERENCES "location" ("id")
+  "location_id" INT NOT NULL REFERENCES "location" ("id")
 );
 
 CREATE TABLE "unit" (
@@ -48,16 +48,23 @@ CREATE TABLE "activity_type" (
 
 CREATE TABLE "activity" (
   "id" SERIAL PRIMARY KEY,
-  "performed_by_id" int REFERENCES "agent" ("id"),
-  "temporal_extent_id" int NOT NULL REFERENCES "temporal_extent" ("id"),
-  "location_id" int NOT NULL REFERENCES "location" ("id"),
-  "determining_flow_id" int,
-  "activity_type_id" int NOT NULL REFERENCES "activity_type" ("id")
+  "performed_by_id" INT REFERENCES "agent" ("id"),
+  "temporal_extent_id" INT NOT NULL REFERENCES "temporal_extent" ("id"),
+  "location_id" INT NOT NULL REFERENCES "location" ("id"),
+  "determining_flow_id" INT,
+  "activity_type_id" INT NOT NULL REFERENCES "activity_type" ("id")
+);
+
+CREATE TABLE "reference_unit" (
+  "id" SERIAL PRIMARY KEY,
+  -- Field label from ontology of units of measure
+  "numerical_value" float,
+  "unit_id" INT REFERENCES "unit" ("id"),
 );
 
 CREATE TABLE "flow_object" (
   "id" SERIAL PRIMARY KEY,
-  "label" text
+  "label" TEXT,
 );
 
 CREATE TABLE "flow" (
@@ -65,10 +72,10 @@ CREATE TABLE "flow" (
   -- Field label from ontology of units of measure
   "numerical_value" float,
   -- Neither are required, but see constraint below
-  "input_of_id" int REFERENCES "activity" ("id"),
-  "output_of_id" int REFERENCES "activity" ("id"),
-  "unit_id" int REFERENCES "unit" ("id"),
-  "object_type_id" int REFERENCES "flow_object" ("id")
+  "input_of_id" INT REFERENCES "activity" ("id"),
+  "output_of_id" INT REFERENCES "activity" ("id"),
+  "unit_id" INT REFERENCES "unit" ("id"),
+  "object_type_id" INT REFERENCES "flow_object" ("id")
 );
 
 ALTER TABLE "flow" ADD CONSTRAINT flow_has_activity CHECK ("input_of_id" IS NOT NULL OR "output_of_id" IS NOT NULL);
@@ -81,7 +88,7 @@ ALTER TABLE activity
 CREATE TABLE "balancable_property" (
   "id" SERIAL PRIMARY KEY,
   "label" text,
-  "flow_id" int REFERENCES "flow" ("id")
+  "flow_id" INT REFERENCES "flow" ("id")
 );
 
 COMMIT;
