@@ -37,10 +37,21 @@ CREATE TABLE "temporal_extent" (
   "finishes" date
 );
 
+
+CREATE TABLE "datasource" (
+  "id" SERIAL PRIMARY KEY,
+  "label" TEXT,
+  "version" TEXT NOT NULL,
+  "source" TEXT,
+  "license_id" TEXT REFERENCES "license" ("identifier")
+);
+
+
 CREATE TABLE "agent" (
   "id" SERIAL PRIMARY KEY,
   "label" text,
-  "location_id" INT NOT NULL REFERENCES "location" ("id")
+  "location_id" INT NOT NULL REFERENCES "location" ("id"),
+  "datasource_id" INT NOT NULL REFERENCES "datasource" ("id")
 );
 
 CREATE TABLE "unit" (
@@ -60,7 +71,8 @@ CREATE TABLE "activity" (
   "temporal_extent_id" INT NOT NULL REFERENCES "temporal_extent" ("id"),
   "location_id" INT NOT NULL REFERENCES "location" ("id"),
   "determining_flow_id" INT,
-  "activity_type_id" INT NOT NULL REFERENCES "activity_type" ("id")
+  "activity_type_id" INT NOT NULL REFERENCES "activity_type" ("id"),
+  "datasource_id" INT NOT NULL REFERENCES "datasource" ("id")
 );
 
 CREATE TABLE "reference_unit" (
@@ -83,7 +95,8 @@ CREATE TABLE "flow" (
   "input_of_id" INT REFERENCES "activity" ("id"),
   "output_of_id" INT REFERENCES "activity" ("id"),
   "unit_id" INT REFERENCES "unit" ("id"),
-  "object_type_id" INT REFERENCES "flow_object" ("id")
+  "object_type_id" INT REFERENCES "flow_object" ("id"),
+  "datasource_id" INT NOT NULL REFERENCES "datasource" ("id")
 );
 
 ALTER TABLE "flow" ADD CONSTRAINT flow_has_activity CHECK ("input_of_id" IS NOT NULL OR "output_of_id" IS NOT NULL);
