@@ -19,3 +19,4 @@ In a terminal, run the following in order:
 Installing common metadata:
 
     psql -d bonsai -a -f common_metadata_licenses.sql
+    psql -d bonsai -a -f common_metadata_locations.sql
