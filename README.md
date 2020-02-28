@@ -8,15 +8,18 @@ See `bonsai_raw_data_schema.sql` and the issues for now.
 
 ## Usage
 
-Install Postgresql with command line tools.
+Install Postgresql with the associated command line tools.
 
-In a terminal, run the following in order:
+In a terminal, run the following:
 
-    psql -a -f create_user.sql
-    psql -a -f create_db.sql
-    psql -d bonsai -a -f bonsai_raw_data_schema.sql
+```bash
+    create_and_populate_database.sh
+```
 
-Installing common metadata:
+## Development
 
-    psql -d bonsai -a -f common_metadata_licenses.sql
-    psql -d bonsai -a -f common_metadata_locations.sql
+Python files (in the `python` directory of this repo) used to define the common metadata require the following dependencies:
+
+- psycopg2
+- pyshp
+- requests
