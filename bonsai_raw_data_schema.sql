@@ -20,6 +20,7 @@ CREATE TABLE "location" (
 
 -- Based on (and populated with data from) https://spdx.org/licenses/
 CREATE TABLE "license" (
+  "id" SERIAL PRIMARY KEY,
   -- Not unique in SPDX input data: GPL and GPL-only
   "full_name" TEXT,
   "identifier" TEXT UNIQUE,
@@ -28,7 +29,7 @@ CREATE TABLE "license" (
 
 CREATE TABLE "temporal_extent" (
   "id" SERIAL PRIMARY KEY,
-  -- White the data type is "date", it is expected that these values will
+  -- While the data type is "date", it is expected that these values will
   -- always be first/last days of a year. See:
   -- https://github.com/BONSAMURAIS/bonsai/wiki/Data-Storage
   -- Labels adapted from OWL time ontology:
@@ -42,8 +43,13 @@ CREATE TABLE "datasource" (
   "id" SERIAL PRIMARY KEY,
   "label" TEXT,
   "version" TEXT NOT NULL,
+  -- The source field is meant to be a URL/URI to indicate the
+  -- the place where the datasources was fetched from
+  -- 
+  -- This is a draft proposal before #9 is solved
   "source" TEXT,
-  "license_id" TEXT REFERENCES "license" ("identifier")
+  "license_id" INT REFERENCES "license" ("id"),
+  "location_id" INT REFERENCES "location" ("id")
 );
 
 
