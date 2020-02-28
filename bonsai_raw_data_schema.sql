@@ -18,6 +18,14 @@ CREATE TABLE "location" (
   "uri" text
 );
 
+-- Based on (and populated with data from) https://spdx.org/licenses/
+CREATE TABLE "license" (
+  -- Not unique in SPDX input data: GPL and GPL-only
+  "full_name" TEXT,
+  "identifier" TEXT UNIQUE,
+  "url" TEXT
+);
+
 CREATE TABLE "temporal_extent" (
   "id" SERIAL PRIMARY KEY,
   -- White the data type is "date", it is expected that these values will
