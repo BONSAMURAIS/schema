@@ -13,9 +13,11 @@ CREATE TABLE "location" (
   "id" SERIAL PRIMARY KEY,
   -- Ontology uses schema:Place (https://schema.org/Place), which wants the
   -- field "name", but we use "label" to be consistent with other tables
-  "label" text,
+  "label" TEXT,
+  -- Field label from schema:Place ontology
+  "identifier" TEXT UNIQUE,
   -- Normally a URL from geonames.org
-  "uri" text
+  "uri" TEXT
 );
 
 -- Based on (and populated with data from) https://spdx.org/licenses/
