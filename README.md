@@ -12,11 +12,13 @@ Install Postgresql with the associated command line tools.
 
 In a terminal, run the following:
 
+```bash
     create_and_populate_database.sh
+```
 
 ## Development
 
-Python files (in `python`) used to define the common metadata require the following dependencies:
+Python files (in the `python` directory of this repo) used to define the common metadata require the following dependencies:
 
 - psycopg2
 - pyshp
