@@ -20,6 +20,8 @@ In a terminal, run the following:
 
 Python files (in the `python` directory of this repo) used to define the common metadata require the following dependencies:
 
+- pandas
 - psycopg2
+- pyarrow
 - pyshp
 - requests
