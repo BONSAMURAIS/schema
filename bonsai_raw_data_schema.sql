@@ -18,6 +18,14 @@ CREATE TABLE "location" (
   "uri" text
 );
 
+-- Based on (and populated with data from) https://spdx.org/licenses/
+CREATE TABLE "license" (
+  -- Not unique in SPDX input data: GPL and GPL-only
+  "full_name" TEXT,
+  "identifier" TEXT UNIQUE,
+  "url" TEXT
+);
+
 CREATE TABLE "temporal_extent" (
   "id" SERIAL PRIMARY KEY,
   -- White the data type is "date", it is expected that these values will
@@ -59,12 +67,12 @@ CREATE TABLE "reference_unit" (
   "id" SERIAL PRIMARY KEY,
   -- Field label from ontology of units of measure
   "numerical_value" float,
-  "unit_id" INT REFERENCES "unit" ("id"),
+  "unit_id" INT REFERENCES "unit" ("id")
 );
 
 CREATE TABLE "flow_object" (
   "id" SERIAL PRIMARY KEY,
-  "label" TEXT,
+  "label" TEXT
 );
 
 CREATE TABLE "flow" (
