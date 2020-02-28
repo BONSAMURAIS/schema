@@ -15,3 +15,7 @@ In a terminal, run the following in order:
     psql -a -f create_user.sql
     psql -a -f create_db.sql
     psql -d bonsai -a -f bonsai_raw_data_schema.sql
+
+Installing common metadata:
+
+    psql -d bonsai -a -f common_metadata_licenses.sql
