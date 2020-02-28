@@ -59,12 +59,12 @@ CREATE TABLE "reference_unit" (
   "id" SERIAL PRIMARY KEY,
   -- Field label from ontology of units of measure
   "numerical_value" float,
-  "unit_id" INT REFERENCES "unit" ("id"),
+  "unit_id" INT REFERENCES "unit" ("id")
 );
 
 CREATE TABLE "flow_object" (
   "id" SERIAL PRIMARY KEY,
-  "label" TEXT,
+  "label" TEXT
 );
 
 CREATE TABLE "flow" (
