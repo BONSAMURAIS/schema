@@ -17,13 +17,13 @@ echo "Creating database"
 psql -a -f sql/reset_db.sql >> $LOGFILE
 
 echo "Creating schema"
-psql -d bonsai -a -f sql/bonsai_raw_data_schema.sql >> $LOGFILE
+psql -U bonsai -d bonsai -a -f sql/bonsai_raw_data_schema.sql >> $LOGFILE
 
 echo "Populating metadata: licenses"
-psql -d bonsai -a -f sql/common_metadata_licenses.sql >> $LOGFILE
+psql -U bonsai -d bonsai -a -f sql/common_metadata_licenses.sql >> $LOGFILE
 
 echo "Populating metadata: locations"
-psql -d bonsai -a -f sql/common_metadata_locations.sql >> $LOGFILE
+psql -U bonsai -d bonsai -a -f sql/common_metadata_locations.sql >> $LOGFILE
 
 echo "Populating metadata: biosphere flows"
-psql -d bonsai -a -f sql/common_metadata_biosphere.sql >> $LOGFILE
+psql -U bonsai -d bonsai -a -f sql/common_metadata_biosphere.sql >> $LOGFILE
