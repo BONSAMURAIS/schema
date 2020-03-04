@@ -47,9 +47,10 @@ CREATE TABLE "datasource" (
   "version" TEXT NOT NULL,
   -- The source field is meant to be a URL/URI to indicate the
   -- the place where the datasources was fetched from
-  -- 
+  --
   -- This is a draft proposal before #9 is solved
   "source" TEXT,
+  "description" TEXT,
   "license_id" INT REFERENCES "license" ("id"),
   "location_id" INT REFERENCES "location" ("id")
 );
