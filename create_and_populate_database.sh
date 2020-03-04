@@ -25,3 +25,5 @@ psql -U bonsai -d bonsai -a -f sql/common_metadata_licenses.sql >> $LOGFILE
 echo "Populating metadata: locations"
 psql -U bonsai -d bonsai -a -f sql/common_metadata_locations.sql >> $LOGFILE
 
+echo "Populating metadata: biosphere flows"
+psql -U bonsai -d bonsai -a -f sql/common_metadata_biosphere.sql >> $LOGFILE

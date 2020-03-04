@@ -93,7 +93,9 @@ CREATE TABLE "reference_unit" (
 
 CREATE TABLE "flow_object" (
   "id" SERIAL PRIMARY KEY,
-  "label" TEXT
+  "label" TEXT,
+  -- CAS number for biosphere flows
+  "CAS" TEXT
 );
 
 CREATE TABLE "flow" (
