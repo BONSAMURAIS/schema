@@ -16,6 +16,12 @@ In a terminal, run the following:
     create_and_populate_database.sh
 ```
 
+On Windows, you can also run a `.bat` file:
+
+```bash
+    create_and_populate_database.bat
+```
+
 ## Development
 
 Python files (in the `python` directory of this repo) used to define the common metadata require the following dependencies:
