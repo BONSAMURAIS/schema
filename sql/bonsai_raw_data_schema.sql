@@ -52,7 +52,6 @@ CREATE TABLE "datasource" (
   "source" TEXT,
   "description" TEXT,
   "license_id" INT REFERENCES "license" ("id"),
-  "location_id" INT REFERENCES "location" ("id")
 );
 
 
