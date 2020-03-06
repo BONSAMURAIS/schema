@@ -51,7 +51,7 @@ CREATE TABLE "datasource" (
   -- This is a draft proposal before #9 is solved
   "source" TEXT,
   "description" TEXT,
-  "license_id" INT REFERENCES "license" ("id"),
+  "license_id" INT REFERENCES "license" ("id")
 );
 
 
